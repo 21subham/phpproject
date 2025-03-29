@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.5.19-MariaDB, for Linux (x86_64)
 --
--- Host: mysql    Database: ladodb
+-- Host: mysql    Database: assignment1
 -- ------------------------------------------------------
 -- Server version	11.7.2-MariaDB-ubu2404
 
@@ -16,36 +16,128 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `ladodb`
+-- Current Database: `assignment1`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ladodb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `assignment1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
 
-USE `ladodb`;
+USE `assignment1`;
 
 --
--- Table structure for table `tori`
+-- Table structure for table `auctions`
 --
 
-DROP TABLE IF EXISTS `tori`;
+DROP TABLE IF EXISTS `auctions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tori` (
-  `randi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+CREATE TABLE `auctions` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `categoryId` varchar(255) DEFAULT NULL,
+  `price` decimal(5,2) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `Foreign` (`user_id`) USING BTREE,
+  CONSTRAINT `test` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tori`
+-- Dumping data for table `auctions`
 --
 
-LOCK TABLES `tori` WRITE;
-/*!40000 ALTER TABLE `tori` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tori` ENABLE KEYS */;
+LOCK TABLES `auctions` WRITE;
+/*!40000 ALTER TABLE `auctions` DISABLE KEYS */;
+INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Home & Garden',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5),(7,'Standing desk','2022-12-23','Perfect for your workspace','Home & Garden',169.00,8),(8,'Down Jacket','2023-01-02','South Face','Fashion',21.34,8),(9,'Covid test kit','2022-12-26','test and stay safe','Health',123.00,9),(10,'Monitor LCD 4k','2022-12-23','4k display','Electronics',29.00,9);
+/*!40000 ALTER TABLE `auctions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'ladodb'
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Home & Garden'),(2,'Electronics'),(3,'Fashion'),(4,'Sport'),(5,'Health'),(6,'Toys'),(8,'Motors');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `review`
+--
+
+DROP TABLE IF EXISTS `review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `review` (
+  `review_id` int(5) NOT NULL AUTO_INCREMENT,
+  `review` varchar(200) NOT NULL,
+  `postedBy` int(5) NOT NULL,
+  `date` date NOT NULL,
+  `forUser` int(5) DEFAULT NULL,
+  PRIMARY KEY (`review_id`),
+  KEY `postedBy` (`postedBy`),
+  KEY `review_ibfk_2` (`forUser`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`postedBy`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`forUser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `review`
+--
+
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (37,'very trusted seller',2,'2022-01-10',1),(43,'late delivery\r\n',4,'2022-01-10',2),(44,'late delivery\r\n',4,'2022-01-10',2),(45,'Bad customer service',8,'2022-01-10',4),(46,'Bad customer service',8,'2022-01-10',4),(47,'Very good seller, delivered in time',9,'2022-01-10',8),(48,'Very good seller, delivered in time',9,'2022-01-10',8);
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Bipin','bipin@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(2,'Samden','samden@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(4,'Phurbu','phurbu@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(5,'nima','nima@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(7,'hello','hello@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(8,'Abhishek','abh@gmail.ccm','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(9,'subham','subham@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'assignment1'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-29 13:22:07
+-- Dump completed on 2025-03-29 13:48:43
