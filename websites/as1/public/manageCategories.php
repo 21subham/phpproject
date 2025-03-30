@@ -13,8 +13,10 @@ if (isset($_SESSION['username'])) {
             $categoryID = $categories['category_id'];
 
             return '<li>' . $categoryName . '</li>
-                    <a href="editCategories.php?categoryID=' . $categoryID . '">edit /</a>
-                    <a href="deleteCategories.php?categoryID=' . $categoryID . '">delete</a>';
+                  <button><a href="editCategories.php?categoryID=' . $categoryID . '">edit </a></button>
+                   <button> <a href="deleteCategories.php?categoryID=' . $categoryID . '">delete</a></button>
+                    <br> <br>';
+
         }, $getCategory);
 
         // output the list items after join

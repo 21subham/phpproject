@@ -14,7 +14,6 @@ if (isset($_SESSION['username'])) {
         <form action="#" method="post">
             <h1 style="color: red">CONFIRM DELETION?</h1><br>
             <button type="submit" name="yes" value="Yes">Yes</button>
-            <!-- <span>||</span> -->
             <a href="manageCategories.php"><button>No</button></a>
         </form>
         <?php
