@@ -50,7 +50,7 @@ CREATE TABLE `auctions` (
 
 LOCK TABLES `auctions` WRITE;
 /*!40000 ALTER TABLE `auctions` DISABLE KEYS */;
-INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Coupe',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5),(7,'Standing desk','2022-12-23','Perfect for your workspace','Coupe',169.00,8),(8,'Down Jacket','2023-01-02','South Face','Fashion',21.34,8),(9,'Covid test kit','2022-12-26','test and stay safe','Health',123.00,9),(10,'Monitor LCD 4k','2022-12-23','4k display','Electronics',29.00,9);
+INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Coupe',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5);
 /*!40000 ALTER TABLE `auctions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (37,'very trusted seller',2,'2022-01-10',1),(43,'late delivery\r\n',4,'2022-01-10',2),(44,'late delivery\r\n',4,'2022-01-10',2),(45,'Bad customer service',8,'2022-01-10',4),(46,'Bad customer service',8,'2022-01-10',4),(47,'Very good seller, delivered in time',9,'2022-01-10',8),(48,'Very good seller, delivered in time',9,'2022-01-10',8);
+INSERT INTO `review` VALUES (37,'very trusted seller',2,'2022-01-10',1),(43,'late delivery\r\n',4,'2022-01-10',2),(44,'late delivery\r\n',4,'2022-01-10',2);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +123,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Bipin','bipin@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(2,'Samden','samden@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(4,'Phurbu','phurbu@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(5,'nima','nima@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(7,'hello','hello@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(8,'Abhishek','abh@gmail.ccm','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(9,'subham','subham@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin');
+INSERT INTO `users` VALUES (1,'Bipin','bipin@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(2,'Samden','samden@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(4,'Phurbu','phurbu@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(5,'nima','nima@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(7,'hello','hello@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(11,'subham','subham@gmail.com','9245f8437b7ad6522943cdb3bc4c30b4f50d835c','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-30  7:35:40
+-- Dump completed on 2025-03-30 10:56:43

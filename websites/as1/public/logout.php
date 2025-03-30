@@ -4,15 +4,13 @@ require 'header.php';
 include_once('dbConn.php');
 
 //remove userdata from session
-// echo 'Login Status=======' ;
-// echo $_SESSION['loggedin'];
-
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
    
     echo "Already Logged out";
     echo ' <br> <a href="login.php"><button>Login</button></a>';
+    
     
     exit();
 }

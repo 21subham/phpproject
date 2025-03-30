@@ -49,6 +49,8 @@ require 'dbConn.php';
 			</form>
 		</header>
 
+
+		<!-- Category Section -->
 		<nav>
 			<ul>
 				<li><a class="categoryLink" href="#">Estate</a></li>
