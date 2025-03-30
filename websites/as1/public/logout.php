@@ -2,33 +2,34 @@
 session_start();
 require 'header.php';
 include_once('dbConn.php');
-?>
-
-<!-- Logout Form -->
-<form action="#" method="POST">
-    <button type="submit" name="logout" value="Logout">Logout</button>
-</form>
-
-<?php
 
 //remove userdata from session
-
-
 // echo 'Login Status=======' ;
 // echo $_SESSION['loggedin'];
 
 if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
    
+    echo "Already Logged out";
+    echo ' <br> <a href="login.php"><button>Login</button></a>';
     
-    unset($_SESSION['username']);
-    unset($_SESSION['userRole']);
-    unset($_SESSION['userID']);
-   
-    $_SESSION['loggedin'] = false;
-   
-    echo 'Logout Successful';
+    exit();
 }
 
-
-require 'footer.php';
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
+    echo 'You are not logged in';
+}
 ?>
+
+
+
+<!-- Logout Form -->
+<form action="#" method="POST">
+    <p>Ready to Logout ?</p>
+    <button type="submit" name="logout" value="Logout">Logout</button>
+</form>
+
+ <?php
+require 'footer.php';
+?> 
