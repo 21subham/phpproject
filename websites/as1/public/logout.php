@@ -14,13 +14,7 @@ if (isset($_POST['logout'])) {
     
     exit();
 }
-
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false) {
-    echo 'You are not logged in';
-}
 ?>
-
-
 
 <!-- Logout Form -->
 <form action="#" method="POST">
