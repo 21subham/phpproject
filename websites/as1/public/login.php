@@ -30,7 +30,7 @@ if (isset($_POST['login'])) {
     $data = $result->fetchAll();
     array_map(function($value) {
         $_SESSION['username'] = $value['name'];
-        $_SESSION['userType'] = $value['role'];
+        $_SESSION['userRole'] = $value['role'];
         $_SESSION['userID'] = $value['id'];
     }, $data);
 
