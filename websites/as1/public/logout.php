@@ -10,15 +10,22 @@ include_once('dbConn.php');
 </form>
 
 <?php
+
 //remove userdata from session
 
+
+// echo 'Login Status=======' ;
+// echo $_SESSION['loggedin'];
+
 if (isset($_POST['logout'])) {
+   
     
     unset($_SESSION['username']);
     unset($_SESSION['userRole']);
     unset($_SESSION['userID']);
    
     $_SESSION['loggedin'] = false;
+   
     echo 'Logout Successful';
 }
 

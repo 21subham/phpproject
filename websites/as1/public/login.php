@@ -47,6 +47,10 @@ else {
 
 };
 
+
+// echo 'Login Status=======' ;
+// echo $_SESSION['loggedin'];
+
 if (isset($_SESSION['username'])) {
     echo 'Welcome, '.$_SESSION['username'];
 }
