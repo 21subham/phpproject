@@ -75,14 +75,20 @@ require 'dbConn.php';
 	<!-- Category Section -->
 	<nav>
 		<ul>
-			<li><a class="categoryLink" href="#">Estate</a></li>
-			<li><a class="categoryLink" href="#">Electric</a></li>
-			<li><a class="categoryLink" href="#">Coupe</a></li>
-			<li><a class="categoryLink" href="#">Saloon</a></li>
-			<li><a class="categoryLink" href="#">4x4</a></li>
-			<li><a class="categoryLink" href="#">Sports</a></li>
-			<li><a class="categoryLink" href="#">Hybrid</a></li>
-			<li><a class="categoryLink" href="#">More</a></li>
+			<?php
+			// foreach ($getCategory as $categories) {
+			// 	$categoryName = $categories['name'];
+			// 	$categoryID = $categories['category_id'];
+			// 	// pasting the given HTML code
+			// 	echo '<li>' . '<a class="categoryLink" href="categoryPage.php?categoryID=' . $categoryID . '">' . $categoryName . '</a>' . '</li>';
+			// }
+			
+			array_map(function ($category) {
+				$categoryName = $category['name'];
+				$categoryID = $category['category_id'];
+				echo '<li>' . '<a class="categoryLink" href="categoryPage.php?categoryID=' . $categoryID . '">' . $categoryName . '</a>' . '</li>';
+			}, array_values($getCategory));
+			?>
 		</ul>
 	</nav>
 
