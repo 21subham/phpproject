@@ -53,6 +53,8 @@ if (isset($_SESSION['username'])) {
 else{
    echo 'Don\'t have an account? <a href="register.php"><button>Register Now!</button></a>';
 }
+
+require 'footer.php';
 ?>
 
 
