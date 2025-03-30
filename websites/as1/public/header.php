@@ -100,9 +100,7 @@ require 'dbConn.php';
 	<span class="HeaderButton">
 		<button>Admin</button>
 		<div class="HeaderButton-options">
-			<a href="adminCategories.php">Show Categories</a>
-			<a href="deleteCategories.php">Delete Categories</a>
-			<a href="editCategories.php">Edit Categories</a>
+			<a href="manageCategories.php">Manage Categories</a>
 			<a href="addCategories.php">Add Categories</a>
 		</div>
 		</div>

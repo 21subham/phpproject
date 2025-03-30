@@ -7,17 +7,17 @@ require 'header.php';
 //check for admin access
 if (isset($_SESSION['username'])) {
     if ($_SESSION['userRole'] === "admin") {
-
+        include_once('dbConn.php');
         ?>
         <!-- category add form -->
         <form action="#" method="POST">
             <label>Add Category:</label>
             <input name="category" type="text" required></br>
-            <button type="submit" name='add'>Add Category</button>
+            <button type="submit" name='addCategory'>Add Category</button>
         </form>
 
         <?php
-        if (isset($_POST['add'])) {
+        if (isset($_POST['addCategory'])) {
             // for first word capital
             $addCategory = ucwords($_POST['category']);
             $addCategoryQuery = $conn->prepare("INSERT INTO `category`(`name`) VALUES (' $addCategory')");
