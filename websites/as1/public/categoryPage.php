@@ -51,4 +51,6 @@ if ($productCount == 0) {
     </li>';
     }, $getProuduct);
 }
+
+require 'footer.php';
 ?>
