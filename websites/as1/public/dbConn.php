@@ -7,10 +7,10 @@
     $conn;
  
    
-      $conn = new PDO('mysql:dbname=assignment1;host=db', $username, $password,[PDO::ATTR_ERRMODE=> PDO::ERRMODE_EXCEPTION]);
+      $conn = new PDO('mysql:dbname=assignment1;host=mysql', $username, $password,[PDO::ATTR_ERRMODE=> PDO::ERRMODE_EXCEPTION]);
  
         
-    $getCategoryQuery = $pdo->prepare('SELECT * FROM category');
+    $getCategoryQuery = $conn->prepare('SELECT * FROM category');
     $getCategoryQuery->execute();
     $getCategory = $getCategoryQuery->fetchAll();  
        

@@ -1,19 +1,9 @@
-<!DOCTYPE html>
+<?php 
 
-		<nav>
-			<ul>
-				<li><a class="categoryLink" href="#">Estate</a></li>
-				<li><a class="categoryLink" href="#">Electric</a></li>
-				<li><a class="categoryLink" href="#">Coupe</a></li>
-				<li><a class="categoryLink" href="#">Saloon</a></li>
-				<li><a class="categoryLink" href="#">4x4</a></li>
-				<li><a class="categoryLink" href="#">Sports</a></li>
-				<li><a class="categoryLink" href="#">Hybrid</a></li>
-				<li><a class="categoryLink" href="#">More</a></li>
-			</ul>
-		</nav>
-		<img src="banners/1.jpg" alt="Banner" />
 
+require 'header.php';
+?>
+		<!DOCTYPE html>
 		<main>
 			<h1>Latest Car Listings / Search Results / Category listing</h1>
 			<ul class="carList">
@@ -106,10 +96,10 @@
 					</form>
 
 
-
-			<footer>
-				&copy; Carbuy 2024
-			</footer>
+<?php 
+require 'footer.php';
+?>
+			
 		</main>
 	</body>
 </html>

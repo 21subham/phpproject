@@ -50,7 +50,7 @@ CREATE TABLE `auctions` (
 
 LOCK TABLES `auctions` WRITE;
 /*!40000 ALTER TABLE `auctions` DISABLE KEYS */;
-INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Home & Garden',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5),(7,'Standing desk','2022-12-23','Perfect for your workspace','Home & Garden',169.00,8),(8,'Down Jacket','2023-01-02','South Face','Fashion',21.34,8),(9,'Covid test kit','2022-12-26','test and stay safe','Health',123.00,9),(10,'Monitor LCD 4k','2022-12-23','4k display','Electronics',29.00,9);
+INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Coupe',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5),(7,'Standing desk','2022-12-23','Perfect for your workspace','Coupe',169.00,8),(8,'Down Jacket','2023-01-02','South Face','Fashion',21.34,8),(9,'Covid test kit','2022-12-26','test and stay safe','Health',123.00,9),(10,'Monitor LCD 4k','2022-12-23','4k display','Electronics',29.00,9);
 /*!40000 ALTER TABLE `auctions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Home & Garden'),(2,'Electronics'),(3,'Fashion'),(4,'Sport'),(5,'Health'),(6,'Toys'),(8,'Motors');
+INSERT INTO `category` VALUES (1,'Estate'),(2,'Electric'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-29 13:51:54
+-- Dump completed on 2025-03-30  7:35:40
