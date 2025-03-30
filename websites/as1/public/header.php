@@ -104,10 +104,10 @@ require 'dbConn.php';
 			<a href="deleteCategories.php">Delete Categories</a>
 			<a href="editCategories.php">Edit Categories</a>
 			<a href="addCategories.php">Add Categories</a>
-
 		</div>
 		</div>
 	</span>
+
 	<img src="banners/1.jpg" alt="Banner" />
 
 
