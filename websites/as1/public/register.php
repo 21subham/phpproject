@@ -32,6 +32,10 @@ if(isset($_POST['submit'])){
     $result = $conn->query("INSERT INTO `users`(`name`, `email`, `password`, `role`) VALUES ('$name','$email','$passw','$role')");
     echo 'Thank you for registering <br/> <a href="login.php"><input type="submit" value="Login Now" name="loginBtn" /> </a>';
 }
+?>
 
+Already Have an Account ?
+<a href="login.php"><button>Login Now</button></a>
+<?php
 require 'footer.php';
 ?>
