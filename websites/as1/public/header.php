@@ -76,13 +76,7 @@ require 'dbConn.php';
 	<nav>
 		<ul>
 			<?php
-			// foreach ($getCategory as $categories) {
-			// 	$categoryName = $categories['name'];
-			// 	$categoryID = $categories['category_id'];
-			// 	// pasting the given HTML code
-			// 	echo '<li>' . '<a class="categoryLink" href="categoryPage.php?categoryID=' . $categoryID . '">' . $categoryName . '</a>' . '</li>';
-			// }
-			
+
 			array_map(function ($category) {
 				$categoryName = $category['name'];
 				$categoryID = $category['category_id'];
