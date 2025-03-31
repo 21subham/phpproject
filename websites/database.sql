@@ -32,16 +32,16 @@ DROP TABLE IF EXISTS `auctions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auctions` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
+  `Product_Name` varchar(255) DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `categoryId` varchar(255) DEFAULT NULL,
-  `price` decimal(5,2) DEFAULT NULL,
+  `price` decimal(8,2) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`product_id`),
   KEY `Foreign` (`user_id`) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `auctions` (
 
 LOCK TABLES `auctions` WRITE;
 /*!40000 ALTER TABLE `auctions` DISABLE KEYS */;
-INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Coupe',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5);
+INSERT INTO `auctions` VALUES (1,'Bookshelf','2022-12-22','height 6ft width 2 feet very premium bookshelf. Condition unused.','Coupe',200.00,1),(2,'iFone S21','2022-12-29','Brand new, 64GB internal storage','Electronics',199.99,2),(3,'Fanny pack','2022-12-21','High quality fanny pack for men','Fashion',28.89,4),(4,'Lewy Jeans','2022-12-15','For women all sizes available','Fashion',29.00,4),(5,'Play Stayson 5','2022-12-21',' Condition : used ','Electronics',399.98,5),(6,'Surgical Mask','2022-12-21','50pcs','Health',12.99,5),(11,'Sasto Gadi','2025-03-18','test test test','Coupe',444.00,11);
 /*!40000 ALTER TABLE `auctions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Estate'),(2,'Dog'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid');
+INSERT INTO `category` VALUES (1,'Estate'),(2,'Electric'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-31  8:13:15
+-- Dump completed on 2025-03-31  8:55:34
