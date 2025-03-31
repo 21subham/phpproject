@@ -13,14 +13,17 @@ if (isset($_SESSION['username'])) {
             $categoryID = $categories['category_id'];
 
             return '<li>' . $categoryName . '</li>
-                  <button><a href="editCategories.php?categoryID=' . $categoryID . '">edit </a></button>
-                   <button> <a href="deleteCategories.php?categoryID=' . $categoryID . '">delete</a></button>
+                  <button><a href="editCategory.php?categoryID=' . $categoryID . '">edit </a></button>
+                   <button> <a href="deleteCategory.php?categoryID=' . $categoryID . '">delete</a></button>
                     <br> <br>';
 
         }, $getCategory);
 
         // output the list items after join
         echo implode('', $categoryList);
+
+
+
 
 
     } else {

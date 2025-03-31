@@ -12,14 +12,14 @@ if (isset($_SESSION['username'])) {
         <!-- category add form -->
         <form action="#" method="POST">
             <label>Add Category:</label>
-            <input name="category" type="text" required></br>
+            <input name="name" type="text" required></br>
             <button type="submit" name='addCategory'>Add Category</button>
         </form>
 
         <?php
         if (isset($_POST['addCategory'])) {
             // for first word capital
-            $addCategory = ucwords($_POST['category']);
+            $addCategory = ucwords($_POST['name']);
             $addCategoryQuery = $conn->prepare("INSERT INTO `category`(`name`) VALUES (' $addCategory')");
             $addCategoryQuery->execute();
             echo '<br><p>New Category added successfully </p> <a href="index.php"><button>Home</button></a>';

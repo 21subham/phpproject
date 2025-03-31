@@ -7,8 +7,8 @@ require 'dbConn.php'
 <h1>Registration</h1>
 
 <form action="#" method="POST">
-    <label for="username">Username: </label>
-    <input type="text" name="username" required /><br>
+    <label for="name">Username: </label>
+    <input type="text" name="name" required /><br>
     <label for="email">Email: </label>
     <input type="email" name="email" required /><br>
     <label for="password">Password: </label>
@@ -24,7 +24,7 @@ require 'dbConn.php'
 <!-- Post userdata to DB -->
 <?php
 if (isset($_POST['submit'])) {
-    $name = $_POST['username'];
+    $name = $_POST['name'];
     $email = $_POST['email'];
     $role = $_POST['role'];
     $passw = sha1($_POST['password']);

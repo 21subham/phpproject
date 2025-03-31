@@ -65,7 +65,7 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Estate'),(2,'Electric'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid');
+INSERT INTO `category` VALUES (1,'Estate'),(2,'Dog'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +123,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Bipin','bipin@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(2,'Samden','samden@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(4,'Phurbu','phurbu@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(5,'nima','nima@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(7,'hello','hello@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(11,'subham','subham@gmail.com','9245f8437b7ad6522943cdb3bc4c30b4f50d835c','admin');
+INSERT INTO `users` VALUES (1,'Bipin','bipin@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','admin'),(2,'Samden','samden@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(4,'Phurbu','phurbu@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(5,'nima','nima@mail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(7,'hello','hello@gmail.com','7ce0359f12857f2a90c7de465f40a95f01cb5da9','user'),(11,'subham','subham@gmail.com','9245f8437b7ad6522943cdb3bc4c30b4f50d835c','admin'),(20,'newguy','newguy@gmail.com','df9f71aae6d4743660c32761b50ac21360032f43','user'),(21,'newguy','newguy@gmail.com','df9f71aae6d4743660c32761b50ac21360032f43','user');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-30 13:08:58
+-- Dump completed on 2025-03-31  8:13:15
