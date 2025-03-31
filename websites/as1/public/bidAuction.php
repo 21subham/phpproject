@@ -7,11 +7,9 @@ if (isset($_SESSION['username'])) {
     $productID = $_GET['CarID'];
 
     // to get car info
-    $getBidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id =$productID");
+    $getBidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id = $productID");
     $getBidQuery->execute();
     $bidInfoResult = $getBidQuery->fetchAll();
-
-
 
     // getting the product info through foreach loop
     foreach ($bidInfoResult as $results) {
@@ -22,9 +20,8 @@ if (isset($_SESSION['username'])) {
         $userID = $results['user_id'];
     }
 
-
-    //seller info
-    $getUsername = $conn->query("SELECT * FROM `users` WHERE  id='$userID'");
+    // seller info
+    $getUsername = $conn->query("SELECT * FROM `users` WHERE id='$userID'");
     $getUsername->execute();
     $usernameResult = $getUsername->fetchAll();
 
@@ -33,46 +30,64 @@ if (isset($_SESSION['username'])) {
         $sellerID = $values['id'];
     }
 
+    // Initialize error messages for bid and review form submissions
+    $bidError = $reviewError = '';
+
     // bid submission handler
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submit_bid'])) {
         $bidPrice = $_POST['bid'];
-        // only execute if new bid is higher
-        if ($bidPrice > $price) {
-            $updatePriceQuery = $conn->query("UPDATE `auctions` SET `price` = '$bidPrice' WHERE product_id = '$productID'");
-            $updatePriceQuery->execute();
+
+        // Only execute if new bid is higher and not empty
+        if (!empty($bidPrice)) {
+            if ($bidPrice > $price) {
+                $updatePriceQuery = $conn->query("UPDATE `auctions` SET `price` = '$bidPrice' WHERE product_id = '$productID'");
+                $updatePriceQuery->execute();
+            } else {
+                $bidError = 'Your bid must be higher than the current bid.';
+            }
+        } else {
+            $bidError = 'Please enter a bid amount.';
+        }
+    }
+
+    // review submission handler
+    if (isset($_POST['submit_review'])) {
+        $reviewsText = $_POST['reviewtext'];
+
+        // Only submit review if not empty
+        if (!empty($reviewsText)) {
+            $date = date("Y-m-d");
+            $reviewBy = $_SESSION['userID'];
+
+            $postReviewQuery = $conn->query("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES ('$reviewsText','$reviewBy','$date','$sellerID')");
+            $postReviewQuery->execute();
+        } else {
+            $reviewError = 'Please enter a review text.';
         }
     }
     ?>
 
     <h1>Car Page</h1>
     <article class="car">
-
         <img src="car.png" alt="car name">
         <section class="details">
-            <h2><?php
-            echo $name;
-            ?></h2>
-            <h3>Category : <?php
-            echo $category;
-            ?></h3>
-            <p>Auction created by <a href="#"><?php
-            echo $username;
-            ?></a></p>
-            <p class="price">Current bid: £ <?php
-            echo $price;
-            ?></p>
+            <h2><?php echo $name; ?></h2>
+            <h3>Category : <?php echo $category; ?></h3>
+            <p>Auction created by <a href="#"><?php echo $username; ?></a></p>
+            <p class="price">Current bid: £ <?php echo $price; ?></p>
             <time>Time left: 8 hours 3 minutes</time>
+
+            <!-- Bid form with error handling -->
             <form action="#" method="POST" class="bid">
                 <input type="text" name="bid" placeholder="Enter bid amount" />
-                <input type="submit" name="submit" value="Place bid" />
+                <input type="submit" name="submit_bid" value="Place bid" />
+                <?php if ($bidError) {
+                    echo '<p class="error">' . $bidError . '</p>';
+                } ?>
             </form>
         </section>
         <section class="description">
-            <p>
-                <?php
-                echo $description;
-                ?>
-            </p>
+            <p><?php echo $description; ?></p>
         </section>
 
         <!-- print reviews -->
@@ -83,38 +98,31 @@ if (isset($_SESSION['username'])) {
         ?>
 
         <section class="reviews">
-            <h2>Reviews of <?php
-            echo $username;
-            ?> </h2>
+            <h2>Reviews of <?php echo $username; ?> </h2>
             <ul>
                 <?php
                 foreach ($reviewsResults as $result2) {
                     $review = $result2['review'];
                     $postedBy = $result2['name'];
                     $datePosted = $result2['date'];
-                    echo '<li><strong>' . $postedBy . '  said </strong>' . $review . ' <em>' . $datePosted . '</em></li>';
+                    echo '<li><strong>' . $postedBy . ' said </strong>' . $review . ' <em>' . $datePosted . '</em></li>';
                 }
                 ?>
             </ul>
 
+            <!-- Review form with error handling -->
             <form action="#" method="POST">
-                <label for="reviewtext">Add your review</label> <textarea name="reviewtext"></textarea>
-
-                <input type="submit" name="submit" value="Add Review" />
+                <label for="reviewtext">Add your review</label>
+                <textarea name="reviewtext"></textarea>
+                <input type="submit" name="submit_review" value="Add Review" />
+                <?php if ($reviewError) {
+                    echo '<p class="error">' . $reviewError . '</p>';
+                } ?>
             </form>
         </section>
     </article>
 
     <?php
-    if (isset($_POST['submit'])) {
-        $reviewsText = $_POST['reviewtext'];
-        $date = date("Y-m-d");
-        $reviewBy = $_SESSION['userID'];
-
-        $postReviewQuery = $conn->query("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES ('$reviewsText','$reviewBy','2022-01-10','$sellerID')");
-        $postReviewQuery->execute();
-    }
-
 } else {
     echo 'You are not logged in <a href="login.php"><button>Login Now!</button></a>';
 }
