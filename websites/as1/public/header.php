@@ -90,8 +90,8 @@ require 'dbConn.php';
 	<div class="headerButton" style="justify-content: center">
 		<button>Profile</button>
 		<div class="HeaderButton-options">
-			<a href="auctionMy.php">My auctions</a>
-			<a href="auctionAdd.php">Add Auction</a>
+			<a href="myAuction.php">My auctions</a>
+			<a href="addAuction.php">Add Auction</a>
 			<a href="register.php">Register</a>
 			<a href="login.php">login</a>
 			<a href="logout.php">logout</a>

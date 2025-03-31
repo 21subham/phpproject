@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `auctions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `auctions` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Product_Name` varchar(255) DEFAULT NULL,
+  `Car_Name` varchar(255) DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `categoryId` varchar(255) DEFAULT NULL,
