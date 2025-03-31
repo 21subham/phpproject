@@ -44,10 +44,10 @@ foreach ($getAuction as $auction) {
     <select name="categories">
         <?php
         // looping through categories from database
-        foreach ($getCategory as $categories) {
+        array_map(function ($categories) {
             $categoryName = $categories['name'];
             echo '<option value="' . $categoryName . '">' . $categoryName . '</option>';
-        }
+        }, $getCategory);
         ?>
     </select><br>
     <button type="submit" name="submit">Submit</button>
