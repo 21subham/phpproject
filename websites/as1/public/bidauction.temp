@@ -7,14 +7,14 @@ if (isset($_SESSION['username'])) {
     $productID = $_GET['productID'];
 
     // to get info
-    $getBidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id =$productID");
-    $getBidQuery->execute();
-    $bidInfoResult = $getBidQuery->fetchAll();
+    $BidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id =$productID");
+    $BidQuery->execute();
+    $Result = $BidQuery->fetchAll();
 
 
 
     // getting the product info through foreach loop
-    foreach ($bidInfoResult as $results) {
+    foreach ($Result as $results) {
         $name = $results['Car_Name'];
         $category = $results['categoryId'];
         $price = $results['price'];
@@ -30,23 +30,28 @@ if (isset($_SESSION['username'])) {
         $username = $values['name'];
         $sellerID = $values['id'];
     }
+    // echo $name;
+    // echo $_SESSION['userID'];
+    // echo $userID;
+    // echo $sellerID;
 
     // after clicking submit button
     if (isset($_POST['submit'])) {
         $bidPrice = $_POST['bid'];
         // query only executes when the amound of new bid is higher than recent bid
         if ($bidPrice > $price) {
-            $updatePriceQuery = $conn->query("UPDATE `auctions` SET `price` = '$bidPrice' WHERE product_id = '$productID'");
+            $updatePriceQuery = $pdo->query("UPDATE `auctions` SET `price` = '$bidPrice' WHERE product_id = '$productID'");
             $updatePriceQuery->execute();
         }
         // refreshes the page 
+        header('location:bidAuction.php?productID=' . $productID);
     }
     ?>
 
-    <h1>Car Page</h1>
-    <article class="car">
+    <h1>Product Page</h1>
+    <article class="product">
 
-        <img src="car.png" alt="car name">
+        <img src="product.png" alt="product name">
         <section class="details">
             <h2><?php
             echo $name;
@@ -106,12 +111,18 @@ if (isset($_SESSION['username'])) {
     </article>
 
     <?php
+    // $getReviewsQuery = $pdo->query("SELECT * FROM `review`");
+    // $getReviewsQuery->execute();
+    // $reviewsResults=$getReviewsQuery->fetchAll();
+
+    // submit reviews 
+
     if (isset($_POST['submit1'])) {
         $reviewsText = $_POST['reviewtext'];
         $date = date("Y-m-d");
         $reviewBy = $_SESSION['userID'];
 
-        $postReviewQuery = $conn->query("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES ('$reviewsText','$reviewBy','2022-01-10','$sellerID')");
+        $postReviewQuery = $pdo->query("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES ('$reviewsText','$reviewBy','2022-01-10','$sellerID')");
         $postReviewQuery->execute();
     }
 
