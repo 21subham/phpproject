@@ -31,7 +31,7 @@ if ($productCount == 0) {
     array_map(function ($product) {
 
         // stoping product information
-        $productName = $product['title'];
+        $productName = $product['Product_Name'];
         $productCategory = $product['categoryId'];
         $productDescription = $product['description'];
         $productPrice = $product['price'];
