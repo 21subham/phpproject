@@ -14,42 +14,43 @@ foreach ($categoryName as $category) {
 }
 
 // same code as index page
-$getProductQuery = $conn->query("SELECT * FROM `auctions` WHERE categoryId='$categoryName' ORDER BY endDate DESC LIMIT 10;");
-$getProductQuery->execute();
-$getProuduct = $getProductQuery->fetchAll();
+$getCarQuery = $conn->query("SELECT * FROM `auctions` WHERE categoryId='$categoryName' ORDER BY endDate DESC LIMIT 10;");
+$getCarQuery->execute();
+$getCar = $getCarQuery->fetchAll();
 echo "<h1>Category listing</h1>";
 
-$productCount = $getProductQuery->rowCount();
+$CarCount = $getCarQuery->rowCount();
 
 // display product/ Message
-if ($productCount == 0) {
+if ($CarCount == 0) {
     echo 'No products available for this category <br/>';
     echo '<a href="addAuction.php"><button>Add Now</button></a>';
 } else {
 
     // loop
-    array_map(function ($product) {
+    array_map(function ($Car) {
 
         // stoping product information
-        $productName = $product['Car_Name'];
-        $productCategory = $product['categoryId'];
-        $productDescription = $product['description'];
-        $productPrice = $product['price'];
-        $productID = $product['product_id'];
+        $CarName = $Car['Car_Name'];
+        $CarCategory = $Car['categoryId'];
+        $CarDescription = $Car['description'];
+        $CarPrice = $Car['price'];
+        $CarID = $Car['product_id'];
 
-        echo '<ul class="productList">
+        echo '
+        <ul class="productList">
     <li>
-        <img src="product.png" alt="product name">.
+        <img src="car.png" alt="car name">.
         <article>
-            <h2>' . $productName . '</h2>
-            <h3>Category : ' . $productCategory . '</h3>
-            <p>' . $productDescription . '</p>
+            <h2>' . $CarName . '</h2>
+            <h3>Category : ' . $CarCategory . '</h3>
+            <p>' . $CarDescription . '</p>
 
-            <p class="price">Current bid: £' . $productPrice . '</p>
-            <a href=bidAuction.php?productID=' . $productID . ' class="more auctionLink"> More &gt;&gt;</a>
+            <p class="price">Current bid: £' . $CarPrice . '</p>
+            <a href=bidAuction.php?CarID=' . $CarID . ' class="more auctionLink"> More &gt;&gt;</a>
         </article>
     </li>';
-    }, $getProuduct);
+    }, $getCar);
 }
 
 require 'footer.php';

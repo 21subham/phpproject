@@ -4,7 +4,7 @@ require 'header.php';
 
 if (isset($_SESSION['username'])) {
     include_once('dbConn.php');
-    $productID = $_GET['productID'];
+    $productID = $_GET['CarID'];
 
     // to get car info
     $getBidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id =$productID");
