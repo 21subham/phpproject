@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
     include_once('dbConn.php');
     $productID = $_GET['productID'];
 
-    // to get info
+    // to get car info
     $getBidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id =$productID");
     $getBidQuery->execute();
     $bidInfoResult = $getBidQuery->fetchAll();
@@ -14,32 +14,33 @@ if (isset($_SESSION['username'])) {
 
 
     // getting the product info through foreach loop
-    foreach ($bidInfoResult as $results) {
+    array_map(function ($results) {
         $name = $results['Car_Name'];
         $category = $results['categoryId'];
         $price = $results['price'];
         $description = $results['description'];
         $userID = $results['user_id'];
-    }
+    }, $bidInfoResult);
 
+
+    //seller info
     $getUsername = $conn->query("SELECT * FROM `users` WHERE  id='$userID'");
     $getUsername->execute();
     $usernameResult = $getUsername->fetchAll();
 
-    foreach ($usernameResult as $values) {
+    array_map(function ($values) {
         $username = $values['name'];
         $sellerID = $values['id'];
-    }
+    }, $usernameResult);
 
-    // after clicking submit button
+    // bid submission handler
     if (isset($_POST['submit'])) {
         $bidPrice = $_POST['bid'];
-        // query only executes when the amound of new bid is higher than recent bid
+        // only execute if new bid is higher
         if ($bidPrice > $price) {
             $updatePriceQuery = $conn->query("UPDATE `auctions` SET `price` = '$bidPrice' WHERE product_id = '$productID'");
             $updatePriceQuery->execute();
         }
-        // refreshes the page 
     }
     ?>
 
@@ -51,7 +52,7 @@ if (isset($_SESSION['username'])) {
             <h2><?php
             echo $name;
             ?></h2>
-            <h3>Product category : <?php
+            <h3>Category : <?php
             echo $category;
             ?></h3>
             <p>Auction created by <a href="#"><?php
@@ -68,14 +69,13 @@ if (isset($_SESSION['username'])) {
         </section>
         <section class="description">
             <p>
-                Product Description :
                 <?php
                 echo $description;
                 ?>
             </p>
         </section>
 
-        <!-- to print reviews using loop -->
+        <!-- print reviews -->
         <?php
         $getReviewsQuery = $conn->query("SELECT u.name, r.review, r.date FROM users u , review r WHERE forUser=$sellerID AND id = postedBy");
         $getReviewsQuery->execute();
@@ -100,13 +100,13 @@ if (isset($_SESSION['username'])) {
             <form action="#" method="POST">
                 <label for="reviewtext">Add your review</label> <textarea name="reviewtext"></textarea>
 
-                <input type="submit" name="submit1" value="Add Review" />
+                <input type="submit" name="submit" value="Add Review" />
             </form>
         </section>
     </article>
 
     <?php
-    if (isset($_POST['submit1'])) {
+    if (isset($_POST['submit'])) {
         $reviewsText = $_POST['reviewtext'];
         $date = date("Y-m-d");
         $reviewBy = $_SESSION['userID'];
@@ -115,7 +115,6 @@ if (isset($_SESSION['username'])) {
         $postReviewQuery->execute();
     }
 
-    // echo $userID2;
 } else {
     echo 'You are not logged in <a href="login.php"><button>Login Now!</button></a>';
 }
