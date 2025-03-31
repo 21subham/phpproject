@@ -14,13 +14,13 @@ if (isset($_SESSION['username'])) {
 
 
     // getting the product info through foreach loop
-    array_map(function ($results) {
+    foreach ($bidInfoResult as $results) {
         $name = $results['Car_Name'];
         $category = $results['categoryId'];
         $price = $results['price'];
         $description = $results['description'];
         $userID = $results['user_id'];
-    }, $bidInfoResult);
+    }
 
 
     //seller info
@@ -28,10 +28,10 @@ if (isset($_SESSION['username'])) {
     $getUsername->execute();
     $usernameResult = $getUsername->fetchAll();
 
-    array_map(function ($values) {
+    foreach ($usernameResult as $values) {
         $username = $values['name'];
         $sellerID = $values['id'];
-    }, $usernameResult);
+    }
 
     // bid submission handler
     if (isset($_POST['submit'])) {
