@@ -47,7 +47,7 @@ if (isset($_SESSION['username'])) {
     <article class="car">
         <img src="car.png" alt="Car Image">
         <section class="details">
-            <h2><?= htmlspecialchars($car['Car_Name']); ?></h2>
+            <h2><?= htmlspecialchars($car['title']); ?></h2>
             <h3>Category: <?= htmlspecialchars($car['categoryId']); ?></h3>
             <p>Auction created by <a href="#"><?= htmlspecialchars($seller['name']); ?></a></p>
             <p class="price">Current bid: £<?= htmlspecialchars($car['price']); ?></p>

@@ -13,7 +13,7 @@ if (isset($_SESSION['username'])) {
         $userID = $_SESSION['userID'];
 
 
-        $AddAuctionQuery = $conn->prepare("INSERT INTO `auction`(`Car_Name`, `endDate`, `description`, `categoryId`,`price`,`user_id`) VALUES ('$Pname','$date','$desc','$category','$price','$userID')");
+        $AddAuctionQuery = $conn->prepare("INSERT INTO `auction`(`title`, `endDate`, `description`, `categoryId`,`price`,`user_id`) VALUES ('$Pname','$date','$desc','$category','$price','$userID')");
         $AddAuctionQuery->execute();
     }
     ?>
