@@ -14,7 +14,7 @@ $getCar = $getCarQuery->fetchAll();
 	<?php
 	// Generate product list directly using array_map
 	array_map(function ($Car) {
-		$CarName = htmlspecialchars($Car['Car_Name']);
+		$CarName = htmlspecialchars($Car['title']);
 		$CarCategory = htmlspecialchars($Car['categoryId']);
 		$CarDescription = htmlspecialchars($Car['description']);
 		$CarPrice = htmlspecialchars($Car['price']);

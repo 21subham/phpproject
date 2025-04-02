@@ -31,7 +31,7 @@ if ($CarCount == 0) {
     array_map(function ($Car) {
 
         // stoping product information
-        $CarName = $Car['Car_Name'];
+        $CarName = $Car['title'];
         $CarCategory = $Car['categoryId'];
         $CarDescription = $Car['description'];
         $CarPrice = $Car['price'];

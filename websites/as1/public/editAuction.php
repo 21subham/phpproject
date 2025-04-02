@@ -5,13 +5,13 @@ require 'dbCOnn.php';
 // getting from the url
 $productID = $_GET['CarID'];
 
-$getAuctionQuery = $conn->query("SELECT `Car_Name`, `endDate`, `description`, `categoryId`, `price` FROM `auction` WHERE product_id = $productID;");
+$getAuctionQuery = $conn->query("SELECT `title`, `endDate`, `description`, `categoryId`, `price` FROM `auction` WHERE product_id = $productID;");
 
 $getAuctionQuery->execute();
 $getAuction = $getAuctionQuery->fetchAll();
 
 foreach ($getAuction as $auction) {
-    $title = $auction['Car_Name'];
+    $title = $auction['title'];
     $endDate = $auction['endDate'];
     $description = $auction['description'];
     $price = $auction['price'];
@@ -25,23 +25,23 @@ foreach ($getAuction as $auction) {
 
 
 <form action="#" method="POST">
-    <label for="carName">Prouct name</label>
-    <input type="text" name="carName" value=<?php
+    <label for="title">Prouct name</label>
+    <input type="text" name="title" value=<?php
     echo $title;
     ?>><br>
-    <label for="carDesc">Description</label>
-    <textarea name="carDesc" id="desc" cols="10" rows="6" maxlength="255"><?php
+    <label for="description">Description</label>
+    <textarea name="description" id="desc" cols="10" rows="6" maxlength="255"><?php
     echo $description;
     ?></textarea>
-    <label for="date">Date</label>
-    <input type="date" name="date" value=<?php
+    <label for="auction_end_date">Date</label>
+    <input type="date" name="auction_end_date" value=<?php
     echo $endDate;
     ?>><br>
     <label for="price">Price</label>
     <input type="text" name="price" value=<?php
     echo $price;
     ?>><br>
-    <select name="categories">
+    <select name="category">
         <?php
         // looping through categories from database
         array_map(function ($categories) {
@@ -57,13 +57,13 @@ foreach ($getAuction as $auction) {
 
 <?php
 if (isset($_POST['submit'])) {
-    $newTitle = $_POST['carName'];
-    $newDescription = $_POST['carDesc'];
-    $newDate = $_POST['date'];
+    $newTitle = $_POST['title'];
+    $newDescription = $_POST['description'];
+    $newDate = $_POST['auction_end_date'];
     $newPrice = $_POST['price'];
-    $newCategory = $_POST['categories'];
+    $newCategory = $_POST['category'];
 
-    $updateAuctionQuery = $conn->query("UPDATE `auction` SET `Car_Name`='$newTitle',`endDate`='$newDate',`description`='$newDescription',`categoryId`='$newCategory',`price`='$newPrice' WHERE product_id='$productID'");
+    $updateAuctionQuery = $conn->query("UPDATE `auction` SET `title`='$newTitle',`endDate`='$newDate',`description`='$newDescription',`categoryId`='$newCategory',`price`='$newPrice' WHERE product_id='$productID'");
     $updateAuctionQuery->execute();
     echo "Auction Updated";
 }
