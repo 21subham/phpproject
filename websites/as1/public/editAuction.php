@@ -51,6 +51,7 @@ foreach ($getAuction as $auction) {
         ?>
     </select><br>
     <button type="submit" name="submit">Submit</button>
+    <button type="submit" name="delete">Delete</button>
 </form>
 
 <!-- After clicking submit button -->
@@ -66,5 +67,11 @@ if (isset($_POST['submit'])) {
     $updateAuctionQuery = $conn->query("UPDATE `auction` SET `title`='$newTitle',`endDate`='$newDate',`description`='$newDescription',`categoryId`='$newCategory',`price`='$newPrice' WHERE product_id='$productID'");
     $updateAuctionQuery->execute();
     echo "Auction Updated";
+}
+
+if (isset($_POST['delete'])) {
+    $deleteAuctionQuery = $conn->query("DELETE FROM `auction` WHERE product_id='$productID'");
+    $deleteAuctionQuery->execute();
+    echo "Auction Deleted";
 }
 ?>
