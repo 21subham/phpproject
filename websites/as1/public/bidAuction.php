@@ -7,7 +7,7 @@ if (isset($_SESSION['username'])) {
     $productID = $_GET['CarID'];
 
     // get car info
-    $bidInfo = $conn->prepare("SELECT * FROM `auctions` WHERE product_id = ?");
+    $bidInfo = $conn->prepare("SELECT * FROM `auction` WHERE product_id = ?");
     $bidInfo->execute([$productID]);
     $car = $bidInfo->fetch();
 
@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) {
     // Handle submit
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if (!empty($_POST['bid']) && $_POST['bid'] > $car['price']) {
-            $conn->prepare("UPDATE `auctions` SET `price` = ? WHERE product_id = ?")->execute([$_POST['bid'], $productID]);
+            $conn->prepare("UPDATE `auction` SET `price` = ? WHERE product_id = ?")->execute([$_POST['bid'], $productID]);
             $car['price'] = $_POST['bid'];
         }
 

@@ -5,7 +5,7 @@ require 'dbCOnn.php';
 // getting from the url
 $productID = $_GET['CarID'];
 
-$getAuctionQuery = $conn->query("SELECT `Car_Name`, `endDate`, `description`, `categoryId`, `price` FROM `auctions` WHERE product_id = $productID;");
+$getAuctionQuery = $conn->query("SELECT `Car_Name`, `endDate`, `description`, `categoryId`, `price` FROM `auction` WHERE product_id = $productID;");
 
 $getAuctionQuery->execute();
 $getAuction = $getAuctionQuery->fetchAll();
@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
     $newPrice = $_POST['price'];
     $newCategory = $_POST['categories'];
 
-    $updateAuctionQuery = $conn->query("UPDATE `auctions` SET `Car_Name`='$newTitle',`endDate`='$newDate',`description`='$newDescription',`categoryId`='$newCategory',`price`='$newPrice' WHERE product_id='$productID'");
+    $updateAuctionQuery = $conn->query("UPDATE `auction` SET `Car_Name`='$newTitle',`endDate`='$newDate',`description`='$newDescription',`categoryId`='$newCategory',`price`='$newPrice' WHERE product_id='$productID'");
     $updateAuctionQuery->execute();
     echo "Auction Updated";
 }

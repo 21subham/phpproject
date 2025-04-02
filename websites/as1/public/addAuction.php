@@ -5,15 +5,15 @@ if (isset($_SESSION['username'])) {
     include_once('dbConn.php');
 
     if (isset($_POST['submit'])) {
-        $Pname = $_POST['productName'];
-        $date = $_POST['enddate'];
-        $desc = $_POST['Desc'];
-        $category = $_POST['categories'];
+        $Pname = $_POST['title'];
+        $date = $_POST['auction_end_date'];
+        $desc = $_POST['description'];
+        $category = $_POST['category'];
         $price = $_POST['price'];
         $userID = $_SESSION['userID'];
 
 
-        $AddAuctionQuery = $conn->prepare("INSERT INTO `auctions`(`Car_Name`, `endDate`, `description`, `categoryId`,`price`,`user_id`) VALUES ('$Pname','$date','$desc','$category','$price','$userID')");
+        $AddAuctionQuery = $conn->prepare("INSERT INTO `auction`(`Car_Name`, `endDate`, `description`, `categoryId`,`price`,`user_id`) VALUES ('$Pname','$date','$desc','$category','$price','$userID')");
         $AddAuctionQuery->execute();
     }
     ?>
@@ -22,21 +22,21 @@ if (isset($_SESSION['username'])) {
     <body>
         <main>
             <form action='#' method='POST'>
-                <label for='productName'>Prouct name</label>
-                <input type='text' name='productName' required><br>
-                <label for='Desc'>Description</label>
-                <textarea name='Desc' id='desc' cols='10' rows='5' maxlength='255' required></textarea>
-                <label for='enddate'>Date</label>
-                <input type='date' name='enddate' required><br>
+                <label for='title'>Prouct name</label>
+                <input type='text' name='title' required><br>
+                <label for='description'>Description</label>
+                <textarea name='description' id='description' cols='10' rows='5' maxlength='255' required></textarea>
+                <label for='auction_end_date'>Date</label>
+                <input type='date' name='auction_end_date' required><br>
                 <label for='price'>Price</label>
-                <input type='text' name='price' required><br>
-                <select name='categories'>
+                <input type='number' name='price' required><br>
+                <select name='category'>
 
                     <?php
                     //categories
                     array_map(function ($categories) {
                         $categoryName = $categories['name'];
-                        echo '<option value="' . $categoryName . '">' . $categoryName . '</option>';
+                        echo '<option value="' . $categoryName . '"  name="category">' . $categoryName . '</option>';
                     }, $getCategory);
                     ?>
 

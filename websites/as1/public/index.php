@@ -4,7 +4,7 @@ session_start();
 require 'header.php';
 require 'dbConn.php';
 
-$getCarQuery = $conn->query('SELECT * FROM `auctions` ORDER BY endDate DESC LIMIT 10;');
+$getCarQuery = $conn->query('SELECT * FROM `auction` ORDER BY endDate DESC LIMIT 10;');
 $getCarQuery->execute();
 $getCar = $getCarQuery->fetchAll();
 ?>

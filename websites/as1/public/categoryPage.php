@@ -14,7 +14,7 @@ foreach ($categoryName as $category) {
 }
 
 // same code as index page
-$getCarQuery = $conn->query("SELECT * FROM `auctions` WHERE categoryId='$categoryName' ORDER BY endDate DESC LIMIT 10;");
+$getCarQuery = $conn->query("SELECT * FROM `auction` WHERE categoryId='$categoryName' ORDER BY endDate DESC LIMIT 10;");
 $getCarQuery->execute();
 $getCar = $getCarQuery->fetchAll();
 echo "<h1>Category listing</h1>";

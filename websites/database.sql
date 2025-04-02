@@ -24,13 +24,13 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `assignment1` /*!40100 DEFAULT CHARACTE
 USE `assignment1`;
 
 --
--- Table structure for table `auctions`
+-- Table structure for table `auction`
 --
 
-DROP TABLE IF EXISTS `auctions`;
+DROP TABLE IF EXISTS `auction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `auctions` (
+CREATE TABLE `auction` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `Car_Name` varchar(255) DEFAULT NULL,
   `endDate` date DEFAULT NULL,
@@ -45,13 +45,12 @@ CREATE TABLE `auctions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auctions`
+-- Dumping data for table `auction`
 --
 
-LOCK TABLES `auctions` WRITE;
-/*!40000 ALTER TABLE `auctions` DISABLE KEYS */;
-INSERT INTO `auctions` VALUES (15,'Test 2','2025-03-26','This is a test car again','Estate',800.00,11),(16,'Range Rover Sport','2025-03-27','The Range Rover Sport is a powerful and luxurious off-roading vehicle with modern tech and a strong presence on any terrain.','4x4',1234.00,11),(17,'Ferrari 488 GTB','2025-03-18','A breathtaking sports car known for its raw power, speed, and striking design that exudes elegance and performance.','Sports',34000.00,11),(18,'Audi e-Tron','2025-04-05','An all-electric luxury SUV with great performance and technology, making it a standout in the world of electric vehicles.','Electric',3400.00,11),(19,'Jaguar F-Type','2025-04-04','The F-Type is a stunning sports car offering sharp handling, a roaring engine, and a sleek design that demands attention.','Sports',11111.00,11),(20,'Tesla Model 3','2025-04-11','A cutting-edge electric sedan offering impressive performance, range, and tech features, perfect for eco-conscious driving.','Electric',250000.00,21),(21,'Toyota Land Cruiser','2025-03-28','A rugged off-roading SUV built for durability, perfect for tough terrains with incredible reliability.','4x4',3213.00,21),(22,'Porsche Cayman','2025-03-27','The Porsche Cayman offers precise handling and a thrilling driving experience wrapped in a beautifully crafted coupe design.','Coupe',124.00,21),(23,'Volkswagen ID.4','2025-03-31','A practical electric SUV that combines range, comfort, and modern features, ideal for anyone making the transition to electric driving.','Electric',8768.00,21),(24,'BMW 4 Series Coupe','2025-03-20','A sleek, stylish coupe with sharp handling and a luxurious interior, making every drive feel like an experience.','Coupe',6575.00,21),(25,'Mercedes-Benz E-Class','2025-03-31','A luxurious saloon offering advanced tech, comfort, and excellent ride quality, perfect for those who value refinement.','Saloon',4321.00,22),(26,'BMW X5','2025-04-23','A powerful luxury SUV with a high-tech interior and great off-road capabilities, combining comfort with adventure.','4x4',2223.00,22),(27,'Subaru Outback','2025-03-23','A versatile estate car with off-road capabilities, a spacious interior, and excellent reliability for all kinds of adventures.\r\n\r\n','Estate',100.00,22),(28,'Audi Q7','2025-04-12','The Audi Q7 combines spaciousness, comfort, and advanced tech, offering a perfect family vehicle with a premium feel.','Estate',5348.00,23),(29,'Ford Mustang','2025-04-08','The Ford Mustang is a legendary sports car that delivers exhilarating performance with an iconic design.','Sports',7876.00,23),(30,'Honda CR-V Hybrid','2025-04-24','A fuel-efficient hybrid SUV offering a smooth ride, spacious interior, and a perfect blend of eco-friendliness and practicality.','Hybrid',3214.00,23);
-/*!40000 ALTER TABLE `auctions` ENABLE KEYS */;
+LOCK TABLES `auction` WRITE;
+/*!40000 ALTER TABLE `auction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -96,7 +95,7 @@ CREATE TABLE `review` (
   KEY `review_ibfk_2` (`forUser`),
   CONSTRAINT `review_ibfk_1` FOREIGN KEY (`postedBy`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `review_ibfk_2` FOREIGN KEY (`forUser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +104,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (99,'Cool car for the price',11,'2022-01-10',11),(100,'Cool car for the price',11,'2022-01-10',11),(101,'',11,'2022-01-10',11),(102,'',11,'2022-01-10',11),(103,'good car',11,'2022-01-10',11),(104,'good car',11,'2022-01-10',11),(105,'nice one',11,'2025-03-31',11),(106,'nice one',11,'2025-03-31',11),(107,'cood car for the price',11,'2025-04-02',21),(108,'cood car for the price',11,'2025-04-02',21),(109,'very nice',11,'2025-04-02',21),(110,'cool car',11,'2025-04-02',21),(111,'Decent performance, but nothing groundbreaking.',23,'2025-04-02',22),(112,'Feels sluggish and underpowered on inclines.',23,'2025-04-02',23);
+INSERT INTO `review` VALUES (99,'Cool car for the price',11,'2022-01-10',11),(100,'Cool car for the price',11,'2022-01-10',11),(103,'good car',11,'2022-01-10',11),(105,'nice one',11,'2025-03-31',11),(107,'cood car for the price',11,'2025-04-02',21),(109,'very nice',11,'2025-04-02',21),(110,'cool car',11,'2025-04-02',21),(111,'Decent performance, but nothing groundbreaking.',23,'2025-04-02',22),(112,'Feels sluggish and underpowered on inclines.',23,'2025-04-02',23),(113,'Too old for the price',11,'2025-04-02',23),(114,'Worth it for the price',21,'2025-04-02',11),(115,'Matches my vibe',21,'2025-04-02',11),(116,'Test review',21,'2025-04-02',21);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +148,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-02  9:36:12
+-- Dump completed on 2025-04-02 13:11:10
