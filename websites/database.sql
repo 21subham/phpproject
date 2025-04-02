@@ -33,7 +33,6 @@ DROP TABLE IF EXISTS `auction`;
 CREATE TABLE `auction` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `categoryId` varchar(255) DEFAULT NULL,
