@@ -96,7 +96,7 @@ CREATE TABLE `review` (
   KEY `review_ibfk_2` (`forUser`),
   CONSTRAINT `review_ibfk_1` FOREIGN KEY (`postedBy`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `review_ibfk_2` FOREIGN KEY (`forUser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (99,'Cool car for the price',11,'2022-01-10',11),(100,'Cool car for the price',11,'2022-01-10',11),(101,'',11,'2022-01-10',11),(102,'',11,'2022-01-10',11),(103,'good car',11,'2022-01-10',11),(104,'good car',11,'2022-01-10',11),(105,'nice one',11,'2025-03-31',11),(106,'nice one',11,'2025-03-31',11);
+INSERT INTO `review` VALUES (99,'Cool car for the price',11,'2022-01-10',11),(100,'Cool car for the price',11,'2022-01-10',11),(101,'',11,'2022-01-10',11),(102,'',11,'2022-01-10',11),(103,'good car',11,'2022-01-10',11),(104,'good car',11,'2022-01-10',11),(105,'nice one',11,'2025-03-31',11),(106,'nice one',11,'2025-03-31',11),(107,'cood car for the price',11,'2025-04-02',21),(108,'cood car for the price',11,'2025-04-02',21),(109,'very nice',11,'2025-04-02',21),(110,'cool car',11,'2025-04-02',21),(111,'Decent performance, but nothing groundbreaking.',23,'2025-04-02',22),(112,'Feels sluggish and underpowered on inclines.',23,'2025-04-02',23);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-02  9:02:17
+-- Dump completed on 2025-04-02  9:36:12
