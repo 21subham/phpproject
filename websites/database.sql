@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS `auction`;
 CREATE TABLE `auction` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `categoryId` varchar(255) DEFAULT NULL,
@@ -41,7 +42,7 @@ CREATE TABLE `auction` (
   PRIMARY KEY (`product_id`),
   KEY `Foreign` (`user_id`) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +51,6 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (31,'test','2025-05-08','fdsfsdafdsafads',' Test',123.00,21),(32,'test reflog','2025-05-01','fsadfsdafsad','Estate',1212.00,21);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-02 13:45:00
+-- Dump completed on 2025-04-02 13:11:10
