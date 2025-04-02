@@ -11,7 +11,7 @@ if (isset($_SESSION['username'])) {
     $getBidQuery->execute();
     $bidInfoResult = $getBidQuery->fetchAll();
 
-    // getting the product info through foreach loop
+    // getting the car info
     foreach ($bidInfoResult as $results) {
         $name = $results['Car_Name'];
         $category = $results['categoryId'];
@@ -20,7 +20,7 @@ if (isset($_SESSION['username'])) {
         $userID = $results['user_id'];
     }
 
-    // seller info
+    //seller info 
     $getUsername = $conn->query("SELECT * FROM `users` WHERE id='$userID'");
     $getUsername->execute();
     $usernameResult = $getUsername->fetchAll();
@@ -30,10 +30,8 @@ if (isset($_SESSION['username'])) {
         $sellerID = $values['id'];
     }
 
-    // Initialize error messages for bid and review form submissions
-    $bidError = $reviewError = '';
 
-    // bid submission handler
+    //handle bid submission
     if (isset($_POST['submit_bid'])) {
         $bidPrice = $_POST['bid'];
 
@@ -49,26 +47,30 @@ if (isset($_SESSION['username'])) {
             $bidError = 'Please enter a bid amount.';
         }
     }
-
     // review submission handler
-    if (isset($_POST['submit_review'])) {
-        $reviewsText = $_POST['reviewtext'];
+    if (isset($_POST['submit_review']) && !empty(trim($_POST['reviewtext']))) {
+        $reviewsText = trim($_POST['reviewtext']);
+        $date = date("Y-m-d");
+        $reviewBy = $_SESSION['userID'];
 
-        // Only submit review if not empty
-        if (!empty($reviewsText)) {
-            $date = date("Y-m-d");
-            $reviewBy = $_SESSION['userID'];
+        // Check if review already exists
+        $checkReview = $conn->prepare("SELECT 1 FROM `review` WHERE `review` = ? AND `postedBy` = ? AND `forUser` = ?");
+        $checkReview->execute([$reviewsText, $reviewBy, $sellerID]);
 
-            $postReviewQuery = $conn->query("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES ('$reviewsText','$reviewBy','$date','$sellerID')");
-            $postReviewQuery->execute();
+        if (!$checkReview->fetch()) {
+            $conn->prepare("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES (?, ?, ?, ?)")
+                ->execute([$reviewsText, $reviewBy, $date, $sellerID]);
         } else {
-            $reviewError = 'Please enter a review text.';
+            $reviewError = "You have already submitted this review.";
         }
+    } else {
+        $reviewError = 'Please enter a review text.';
     }
     ?>
 
     <h1>Car Page</h1>
     <article class="car">
+
         <img src="car.png" alt="car name">
         <section class="details">
             <h2><?php echo $name; ?></h2>
@@ -81,9 +83,7 @@ if (isset($_SESSION['username'])) {
             <form action="#" method="POST" class="bid">
                 <input type="text" name="bid" placeholder="Enter bid amount" />
                 <input type="submit" name="submit_bid" value="Place bid" />
-                <?php if ($bidError) {
-                    echo '<p class="error">' . $bidError . '</p>';
-                } ?>
+
             </form>
         </section>
         <section class="description">
@@ -115,9 +115,7 @@ if (isset($_SESSION['username'])) {
                 <label for="reviewtext">Add your review</label>
                 <textarea name="reviewtext"></textarea>
                 <input type="submit" name="submit_review" value="Add Review" />
-                <?php if ($reviewError) {
-                    echo '<p class="error">' . $reviewError . '</p>';
-                } ?>
+
             </form>
         </section>
     </article>
