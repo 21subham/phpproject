@@ -60,11 +60,7 @@ if (isset($_SESSION['username'])) {
         if (!$checkReview->fetch()) {
             $conn->prepare("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES (?, ?, ?, ?)")
                 ->execute([$reviewsText, $reviewBy, $date, $sellerID]);
-        } else {
-            $reviewError = "You have already submitted this review.";
         }
-    } else {
-        $reviewError = 'Please enter a review text.';
     }
     ?>
 
