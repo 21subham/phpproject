@@ -6,112 +6,77 @@ if (isset($_SESSION['username'])) {
     include_once('dbConn.php');
     $productID = $_GET['CarID'];
 
-    // to get car info
-    $getBidQuery = $conn->query("SELECT * FROM `auctions` WHERE product_id = $productID");
-    $getBidQuery->execute();
-    $bidInfoResult = $getBidQuery->fetchAll();
+    // get car info
+    $bidInfo = $conn->prepare("SELECT * FROM `auctions` WHERE product_id = ?");
+    $bidInfo->execute([$productID]);
+    $car = $bidInfo->fetch();
 
-    // getting the car info
-    foreach ($bidInfoResult as $results) {
-        $name = $results['Car_Name'];
-        $category = $results['categoryId'];
-        $price = $results['price'];
-        $description = $results['description'];
-        $userID = $results['user_id'];
-    }
+    // get seller info
+    $userQuery = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+    $userQuery->execute([$car['user_id']]);
+    $seller = $userQuery->fetch();
 
-    //seller info 
-    $getUsername = $conn->query("SELECT * FROM `users` WHERE id='$userID'");
-    $getUsername->execute();
-    $usernameResult = $getUsername->fetchAll();
+    // Handle submit
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+        if (!empty($_POST['bid']) && $_POST['bid'] > $car['price']) {
+            $conn->prepare("UPDATE `auctions` SET `price` = ? WHERE product_id = ?")->execute([$_POST['bid'], $productID]);
+            $car['price'] = $_POST['bid'];
+        }
 
-    foreach ($usernameResult as $values) {
-        $username = $values['name'];
-        $sellerID = $values['id'];
-    }
+        if (!empty(trim($_POST['reviewText']))) {
+            $reviewBy = $_SESSION['userID'];
+            $reviewText = trim($_POST['reviewText']);
+            $date = date("Y-m-d");
 
+            // prevent multiple queries (review duplication)
+            $checkReview = $conn->prepare("SELECT 1 FROM `review` WHERE `review` = ? AND `postedBy` = ? AND `forUser` = ?");
+            $checkReview->execute([$reviewText, $reviewBy, $seller['id']]);
 
-    //handle bid submission
-    if (isset($_POST['submit_bid'])) {
-        $bidPrice = $_POST['bid'];
-
-        // Only execute if new bid is higher and not empty
-        if (!empty($bidPrice)) {
-            if ($bidPrice > $price) {
-                $updatePriceQuery = $conn->query("UPDATE `auctions` SET `price` = '$bidPrice' WHERE product_id = '$productID'");
-                $updatePriceQuery->execute();
-            } else {
-                $bidError = 'Your bid must be higher than the current bid.';
+            if (!$checkReview->fetch()) {
+                $conn->prepare("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES (?, ?, ?, ?)")->execute([$reviewText, $reviewBy, $date, $seller['id']]);
             }
-        } else {
-            $bidError = 'Please enter a bid amount.';
         }
     }
-    // review submission handler
-    if (isset($_POST['submit_review']) && !empty(trim($_POST['reviewtext']))) {
-        $reviewsText = trim($_POST['reviewtext']);
-        $date = date("Y-m-d");
-        $reviewBy = $_SESSION['userID'];
 
-        // Check if review already exists
-        $checkReview = $conn->prepare("SELECT 1 FROM `review` WHERE `review` = ? AND `postedBy` = ? AND `forUser` = ?");
-        $checkReview->execute([$reviewsText, $reviewBy, $sellerID]);
-
-        if (!$checkReview->fetch()) {
-            $conn->prepare("INSERT INTO `review`(`review`, `postedBy`, `date`, `forUser`) VALUES (?, ?, ?, ?)")
-                ->execute([$reviewsText, $reviewBy, $date, $sellerID]);
-        }
-    }
+    // get reviews
+    $reviews = $conn->prepare("SELECT u.name, r.review, r.date FROM users u, review r WHERE r.forUser = ? AND u.id = r.postedBy");
+    $reviews->execute([$seller['id']]);
     ?>
 
     <h1>Car Page</h1>
     <article class="car">
-
-        <img src="car.png" alt="car name">
+        <img src="car.png" alt="Car Image">
         <section class="details">
-            <h2><?php echo $name; ?></h2>
-            <h3>Category : <?php echo $category; ?></h3>
-            <p>Auction created by <a href="#"><?php echo $username; ?></a></p>
-            <p class="price">Current bid: £ <?php echo $price; ?></p>
+            <h2><?= htmlspecialchars($car['Car_Name']); ?></h2>
+            <h3>Category: <?= htmlspecialchars($car['categoryId']); ?></h3>
+            <p>Auction created by <a href="#"><?= htmlspecialchars($seller['name']); ?></a></p>
+            <p class="price">Current bid: £<?= htmlspecialchars($car['price']); ?></p>
             <time>Time left: 8 hours 3 minutes</time>
 
-            <!-- Bid form with error handling -->
-            <form action="#" method="POST" class="bid">
+            <form method="POST">
                 <input type="text" name="bid" placeholder="Enter bid amount" />
-                <input type="submit" name="submit_bid" value="Place bid" />
-
+                <input type="submit" name="submit" value="Place bid" />
             </form>
         </section>
+
         <section class="description">
-            <p><?php echo $description; ?></p>
+            <p><?= htmlspecialchars($car['description']); ?></p>
         </section>
 
-        <!-- print reviews -->
-        <?php
-        $getReviewsQuery = $conn->query("SELECT u.name, r.review, r.date FROM users u , review r WHERE forUser=$sellerID AND id = postedBy");
-        $getReviewsQuery->execute();
-        $reviewsResults = $getReviewsQuery->fetchAll();
-        ?>
-
         <section class="reviews">
-            <h2>Reviews of <?php echo $username; ?> </h2>
+            <h2>Reviews of <?= htmlspecialchars($seller['name']); ?></h2>
             <ul>
-                <?php
-                foreach ($reviewsResults as $result2) {
-                    $review = $result2['review'];
-                    $postedBy = $result2['name'];
-                    $datePosted = $result2['date'];
-                    echo '<li><strong>' . $postedBy . ' said </strong>' . $review . ' <em>' . $datePosted . '</em></li>';
-                }
-                ?>
+                <?php foreach ($reviews as $r): ?>
+                    <li><strong><?= htmlspecialchars($r['name']); ?> said</strong> <?= htmlspecialchars($r['review']); ?>
+                        <em><?= htmlspecialchars($r['date']); ?></em>
+                    </li>
+                <?php endforeach; ?>
             </ul>
 
-            <!-- Review form with error handling -->
-            <form action="#" method="POST">
-                <label for="reviewtext">Add your review</label>
-                <textarea name="reviewtext"></textarea>
-                <input type="submit" name="submit_review" value="Add Review" />
-
+            <form method="POST">
+                <label for="reviewText">Add your review</label>
+                <textarea name="reviewText"></textarea>
+                <input type="submit" name="submit" value="Add Review" />
             </form>
         </section>
     </article>
