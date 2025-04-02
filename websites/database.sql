@@ -41,7 +41,7 @@ CREATE TABLE `auction` (
   PRIMARY KEY (`product_id`),
   KEY `Foreign` (`user_id`) USING BTREE,
   CONSTRAINT `test` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,6 +50,7 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
+INSERT INTO `auction` VALUES (32,'test car','2025-05-01','fdsfsdafsdafsdfsdafsad','Estate',31231.00,11);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +65,7 @@ CREATE TABLE `category` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +74,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Estate'),(2,'Electric'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid'),(15,' Test');
+INSERT INTO `category` VALUES (1,'Estate'),(2,'Electric'),(3,'Coupe'),(4,'Saloon'),(5,'4x4'),(6,'Sports'),(8,'Hybrid'),(15,' Test'),(19,' Test2');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +96,7 @@ CREATE TABLE `review` (
   KEY `review_ibfk_2` (`forUser`),
   CONSTRAINT `review_ibfk_1` FOREIGN KEY (`postedBy`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `review_ibfk_2` FOREIGN KEY (`forUser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +105,7 @@ CREATE TABLE `review` (
 
 LOCK TABLES `review` WRITE;
 /*!40000 ALTER TABLE `review` DISABLE KEYS */;
-INSERT INTO `review` VALUES (99,'Cool car for the price',11,'2022-01-10',11),(100,'Cool car for the price',11,'2022-01-10',11),(103,'good car',11,'2022-01-10',11),(105,'nice one',11,'2025-03-31',11),(107,'cood car for the price',11,'2025-04-02',21),(109,'very nice',11,'2025-04-02',21),(110,'cool car',11,'2025-04-02',21),(111,'Decent performance, but nothing groundbreaking.',23,'2025-04-02',22),(112,'Feels sluggish and underpowered on inclines.',23,'2025-04-02',23),(113,'Too old for the price',11,'2025-04-02',23),(114,'Worth it for the price',21,'2025-04-02',11),(115,'Matches my vibe',21,'2025-04-02',11),(116,'Test review',21,'2025-04-02',21);
+INSERT INTO `review` VALUES (99,'Cool car for the price',11,'2022-01-10',11),(100,'Cool car for the price',11,'2022-01-10',11),(103,'good car',11,'2022-01-10',11),(105,'nice one',11,'2025-03-31',11),(107,'cood car for the price',11,'2025-04-02',21),(109,'very nice',11,'2025-04-02',21),(110,'cool car',11,'2025-04-02',21),(111,'Decent performance, but nothing groundbreaking.',23,'2025-04-02',22),(112,'Feels sluggish and underpowered on inclines.',23,'2025-04-02',23),(113,'Too old for the price',11,'2025-04-02',23),(114,'Worth it for the price',21,'2025-04-02',11),(115,'Matches my vibe',21,'2025-04-02',11),(116,'Test review',21,'2025-04-02',21),(118,'lastai pat',11,'2025-04-02',11);
 /*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-02 13:11:10
+-- Dump completed on 2025-04-02 13:56:34
